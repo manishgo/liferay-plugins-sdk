@@ -121,6 +121,20 @@ public class PRProductLocalServiceClp implements PRProductLocalService {
 				"com.inkwell.internet.productregistration.model.PRProduct",
 				"long"
 			};
+
+		_methodName20 = "deleteProduct";
+
+		_methodParameterTypes20 = new String[] { "long" };
+
+		_methodName21 = "deleteProduct";
+
+		_methodParameterTypes21 = new String[] {
+				"com.inkwell.internet.productregistration.model.PRProduct"
+			};
+
+		_methodName22 = "getAllProducts";
+
+		_methodParameterTypes22 = new String[] { "long" };
 	}
 
 	public com.inkwell.internet.productregistration.model.PRProduct addPRProduct(
@@ -689,6 +703,92 @@ public class PRProductLocalServiceClp implements PRProductLocalService {
 		return (com.inkwell.internet.productregistration.model.PRProduct)ClpSerializer.translateOutput(returnObj);
 	}
 
+	public void deleteProduct(long productId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		try {
+			_invokableLocalService.invokeMethod(_methodName20,
+				_methodParameterTypes20, new Object[] { productId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+				throw (com.liferay.portal.kernel.exception.PortalException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
+	public void deleteProduct(
+		com.inkwell.internet.productregistration.model.PRProduct product)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		try {
+			_invokableLocalService.invokeMethod(_methodName21,
+				_methodParameterTypes21,
+				new Object[] { ClpSerializer.translateInput(product) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+				throw (com.liferay.portal.kernel.exception.PortalException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
+	public java.util.List<com.inkwell.internet.productregistration.model.PRProduct> getAllProducts(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName22,
+					_methodParameterTypes22, new Object[] { groupId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.inkwell.internet.productregistration.model.PRProduct>)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -728,4 +828,10 @@ public class PRProductLocalServiceClp implements PRProductLocalService {
 	private String[] _methodParameterTypes17;
 	private String _methodName19;
 	private String[] _methodParameterTypes19;
+	private String _methodName20;
+	private String[] _methodParameterTypes20;
+	private String _methodName21;
+	private String[] _methodParameterTypes21;
+	private String _methodName22;
+	private String[] _methodParameterTypes22;
 }

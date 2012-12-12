@@ -14,10 +14,14 @@
 
 package com.inkwell.internet.productregistration.service.impl;
 
+import java.util.List;
+
+import com.inkwell.internet.productregistration.NoSuchProductException;
 import com.inkwell.internet.productregistration.model.PRProduct;
 import com.inkwell.internet.productregistration.service.base.PRProductLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.model.ResourceConstants;
 
 /**
  * The implementation of the p r product local service.
@@ -62,5 +66,24 @@ public class PRProductLocalServiceImpl extends PRProductLocalServiceBaseImpl {
 		product.setGroupId(newProduct.getGroupId());
 
 		return prProductPersistence.update(product, false);
+	}
+
+	public void deleteProduct(long productId) throws SystemException,
+			PortalException {
+		PRProduct product = prProductPersistence.findByPrimaryKey(productId);
+		deleteProduct(product);
+	}
+
+	public void deleteProduct(PRProduct product) throws PortalException,
+			SystemException {
+		resourceLocalService.deleteResource(product.getCompanyId(),
+				PRProduct.class.getName(), ResourceConstants.SCOPE_INDIVIDUAL,
+				product.getPrimaryKey());
+		prProductPersistence.remove(product);
+	}
+
+	public List<PRProduct> getAllProducts(long groupId) throws SystemException {
+		List<PRProduct> products = prProductPersistence.findByGroupId(groupId);
+		return products;
 	}
 }

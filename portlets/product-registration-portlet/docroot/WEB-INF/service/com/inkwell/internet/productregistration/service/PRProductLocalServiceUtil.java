@@ -284,6 +284,25 @@ public class PRProductLocalServiceUtil {
 		return getService().addProduct(newProduct, userId);
 	}
 
+	public static void deleteProduct(long productId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteProduct(productId);
+	}
+
+	public static void deleteProduct(
+		com.inkwell.internet.productregistration.model.PRProduct product)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteProduct(product);
+	}
+
+	public static java.util.List<com.inkwell.internet.productregistration.model.PRProduct> getAllProducts(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getAllProducts(groupId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

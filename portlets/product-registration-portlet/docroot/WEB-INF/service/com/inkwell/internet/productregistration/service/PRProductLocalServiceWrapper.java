@@ -279,6 +279,25 @@ public class PRProductLocalServiceWrapper implements PRProductLocalService,
 		return _prProductLocalService.addProduct(newProduct, userId);
 	}
 
+	public void deleteProduct(long productId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_prProductLocalService.deleteProduct(productId);
+	}
+
+	public void deleteProduct(
+		com.inkwell.internet.productregistration.model.PRProduct product)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_prProductLocalService.deleteProduct(product);
+	}
+
+	public java.util.List<com.inkwell.internet.productregistration.model.PRProduct> getAllProducts(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _prProductLocalService.getAllProducts(groupId);
+	}
+
 	/**
 	 * @deprecated Renamed to {@link #getWrappedService}
 	 */

@@ -119,6 +119,20 @@ public class PRProductLocalServiceClpInvoker {
 				"com.inkwell.internet.productregistration.model.PRProduct",
 				"long"
 			};
+
+		_methodName43 = "deleteProduct";
+
+		_methodParameterTypes43 = new String[] { "long" };
+
+		_methodName44 = "deleteProduct";
+
+		_methodParameterTypes44 = new String[] {
+				"com.inkwell.internet.productregistration.model.PRProduct"
+			};
+
+		_methodName45 = "getAllProducts";
+
+		_methodParameterTypes45 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -226,6 +240,21 @@ public class PRProductLocalServiceClpInvoker {
 				((Long)arguments[1]).longValue());
 		}
 
+		if (_methodName43.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes43, parameterTypes)) {
+			PRProductLocalServiceUtil.deleteProduct(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName44.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes44, parameterTypes)) {
+			PRProductLocalServiceUtil.deleteProduct((com.inkwell.internet.productregistration.model.PRProduct)arguments[0]);
+		}
+
+		if (_methodName45.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes45, parameterTypes)) {
+			return PRProductLocalServiceUtil.getAllProducts(((Long)arguments[0]).longValue());
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -267,4 +296,10 @@ public class PRProductLocalServiceClpInvoker {
 	private String[] _methodParameterTypes37;
 	private String _methodName42;
 	private String[] _methodParameterTypes42;
+	private String _methodName43;
+	private String[] _methodParameterTypes43;
+	private String _methodName44;
+	private String[] _methodParameterTypes44;
+	private String _methodName45;
+	private String[] _methodParameterTypes45;
 }
