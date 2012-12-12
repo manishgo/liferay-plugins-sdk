@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.inkwell.internet.productregistration.model.PRProduct">
+		<field name="productId" type="long" />
+		<field name="productName" type="String" />
+		<field name="serialNumber" type="String" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+	</model>
+</model-hints>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_0_0.dtd">
+<service-builder package-path="com.inkwell.internet.productregistration" >
+
+    <author>
+manish
+    </author>
+
+    <namespace>
+PR
+    </namespace>
+
+    <entity
+        name="PRProduct"
+        local-service="true"
+        remote-service="false" >
+
+        <column
+            name="productId"
+            primary="true"
+            type="long" />
+
+        <column
+            name="productName"
+            type="String" />
+
+        <column
+            name="serialNumber"
+            type="String" />
+
+        <column
+            name="companyId"
+            type="long" />
+
+        <column
+            name="groupId"
+            type="long" />
+
+        <order by="asc" >
+
+            <order-column name="productName" />
+        </order>
+
+        <finder
+            name="G_PN"
+            return-type="Collection" >
+
+            <finder-column name="groupId" />
+
+            <finder-column name="productName" />
+        </finder>
+
+        <finder
+            name="GroupId"
+            return-type="Collection" >
+
+            <finder-column name="groupId" >
+            </finder-column>
+        </finder>
+
+        <finder
+            name="CompanyId"
+            return-type="Collection" >
+
+            <finder-column name="companyId" >
+            </finder-column>
+        </finder>
+    </entity>
+
+</service-builder>

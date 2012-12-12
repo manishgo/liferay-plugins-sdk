@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.inkwell.internet.productregistration.model.PRProduct" />
+	<class name="com.inkwell.internet.productregistration.model.impl.PRProductImpl" table="PR_PRProduct">
+		<cache usage="read-write" />
+		<id name="productId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="productName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="serialNumber" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+</hibernate-mapping>
