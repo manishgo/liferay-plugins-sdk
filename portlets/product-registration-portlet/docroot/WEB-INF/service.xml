@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_0_0.dtd">
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.1.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_1_0.dtd">
 <service-builder package-path="com.inkwell.internet.productregistration" >
 
     <author>
@@ -64,6 +64,194 @@ PR
 
             <finder-column name="companyId" >
             </finder-column>
+        </finder>
+    </entity>
+
+    <entity
+        name="PRUser"
+        local-service="true"
+        remote-service="false" >
+
+        <column
+            name="prUserId"
+            primary="true"
+            type="long" />
+
+        <column
+            name="firstName"
+            type="String" />
+
+        <column
+            name="lastName"
+            type="String" />
+
+        <column
+            name="address1"
+            type="String" />
+
+        <column
+            name="address2"
+            type="String" />
+
+        <column
+            name="city"
+            type="String" />
+
+        <column
+            name="state"
+            type="String" />
+
+        <column
+            name="postalCode"
+            type="String" />
+
+        <column
+            name="country"
+            type="String" />
+
+        <column
+            name="phoneNumber"
+            type="String" />
+
+        <column
+            name="email"
+            type="String" />
+
+        <column
+            name="birthDate"
+            type="Date" />
+
+        <column
+            name="male"
+            type="boolean" />
+
+        <column
+            name="userId"
+            type="long" />
+
+        <column
+            name="companyId"
+            type="long" />
+
+        <column
+            name="groupId"
+            type="long" />
+
+        <column
+            name="userRegistrations"
+            entity="PRRegistration"
+            mapping-key="prUserId"
+            type="Collection" />
+
+        <order by="asc" >
+
+            <order-column
+                name="lastName"
+                case-sensitive="false" />
+        </order>
+
+        <finder
+            name="G_LN"
+            return-type="Collection" >
+
+            <finder-column name="groupId" />
+
+            <finder-column name="lastName" />
+        </finder>
+
+        <finder
+            name="G_E"
+            return-type="Collection" >
+
+            <finder-column name="groupId" />
+
+            <finder-column name="email" />
+        </finder>
+
+        <finder
+            name="G_U"
+            return-type="Collection" >
+
+            <finder-column name="groupId" />
+
+            <finder-column name="userId" />
+        </finder>
+    </entity>
+
+    <entity
+        name="PRRegistration"
+        local-service="true"
+        remote-service="false" >
+
+        <column
+            name="registrationId"
+            primary="true"
+            type="long" />
+
+        <column
+            name="prUserId"
+            type="long" />
+
+        <column
+            name="datePurchased"
+            type="Date" />
+
+        <column
+            name="howHear"
+            type="String" />
+
+        <column
+            name="wherePurchased"
+            type="String" />
+
+        <column
+            name="serialNumber"
+            type="String" />
+
+        <column
+            name="productId"
+            type="long" />
+
+        <column
+            name="companyId"
+            type="long" />
+
+        <column
+            name="groupId"
+            type="long" />
+
+        <finder
+            name="GroupId"
+            return-type="Collection" >
+
+            <finder-column name="groupId" />
+        </finder>
+
+        <finder
+            name="G_RU"
+            return-type="Collection" >
+
+            <finder-column name="groupId" />
+
+            <finder-column name="prUserId" />
+        </finder>
+
+        <finder
+            name="G_DP"
+            return-type="Collection" >
+
+            <finder-column name="groupId" />
+
+            <finder-column name="datePurchased" />
+        </finder>
+
+        <finder
+            name="G_SN"
+            return-type="Collection" >
+
+            <finder-column name="groupId" />
+
+            <finder-column name="serialNumber" />
         </finder>
     </entity>
 

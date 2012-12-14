@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,98 +14,31 @@
 
 package com.inkwell.internet.productregistration.model;
 
-import com.inkwell.internet.productregistration.service.PRProductLocalServiceUtil;
-
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.impl.BaseModelImpl;
 
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
- * @author 
-manish
-    
+ * @author Rich Sezov
  */
 public class PRProductClp extends BaseModelImpl<PRProduct> implements PRProduct {
 	public PRProductClp() {
-	}
-
-	public Class<?> getModelClass() {
-		return PRProduct.class;
-	}
-
-	public String getModelClassName() {
-		return PRProduct.class.getName();
 	}
 
 	public long getPrimaryKey() {
 		return _productId;
 	}
 
-	public void setPrimaryKey(long primaryKey) {
-		setProductId(primaryKey);
+	public void setPrimaryKey(long pk) {
+		setProductId(pk);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_productId);
-	}
-
-	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
-		setPrimaryKey(((Long)primaryKeyObj).longValue());
-	}
-
-	@Override
-	public Map<String, Object> getModelAttributes() {
-		Map<String, Object> attributes = new HashMap<String, Object>();
-
-		attributes.put("productId", getProductId());
-		attributes.put("productName", getProductName());
-		attributes.put("serialNumber", getSerialNumber());
-		attributes.put("companyId", getCompanyId());
-		attributes.put("groupId", getGroupId());
-
-		return attributes;
-	}
-
-	@Override
-	public void setModelAttributes(Map<String, Object> attributes) {
-		Long productId = (Long)attributes.get("productId");
-
-		if (productId != null) {
-			setProductId(productId);
-		}
-
-		String productName = (String)attributes.get("productName");
-
-		if (productName != null) {
-			setProductName(productName);
-		}
-
-		String serialNumber = (String)attributes.get("serialNumber");
-
-		if (serialNumber != null) {
-			setSerialNumber(serialNumber);
-		}
-
-		Long companyId = (Long)attributes.get("companyId");
-
-		if (companyId != null) {
-			setCompanyId(companyId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
-		}
 	}
 
 	public long getProductId() {
@@ -148,30 +81,16 @@ public class PRProductClp extends BaseModelImpl<PRProduct> implements PRProduct 
 		_groupId = groupId;
 	}
 
-	public BaseModel<?> getPRProductRemoteModel() {
-		return _prProductRemoteModel;
-	}
-
-	public void setPRProductRemoteModel(BaseModel<?> prProductRemoteModel) {
-		_prProductRemoteModel = prProductRemoteModel;
-	}
-
-	public void persist() throws SystemException {
-		if (this.isNew()) {
-			PRProductLocalServiceUtil.addPRProduct(this);
+	public PRProduct toEscapedModel() {
+		if (isEscapedModel()) {
+			return this;
 		}
 		else {
-			PRProductLocalServiceUtil.updatePRProduct(this);
+			return (PRProduct)Proxy.newProxyInstance(PRProduct.class.getClassLoader(),
+				new Class[] { PRProduct.class }, new AutoEscapeBeanHandler(this));
 		}
 	}
 
-	@Override
-	public PRProduct toEscapedModel() {
-		return (PRProduct)Proxy.newProxyInstance(PRProduct.class.getClassLoader(),
-			new Class[] { PRProduct.class }, new AutoEscapeBeanHandler(this));
-	}
-
-	@Override
 	public Object clone() {
 		PRProductClp clone = new PRProductClp();
 
@@ -196,7 +115,6 @@ public class PRProductClp extends BaseModelImpl<PRProduct> implements PRProduct 
 		return 0;
 	}
 
-	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -211,9 +129,9 @@ public class PRProductClp extends BaseModelImpl<PRProduct> implements PRProduct 
 			return false;
 		}
 
-		long primaryKey = prProduct.getPrimaryKey();
+		long pk = prProduct.getPrimaryKey();
 
-		if (getPrimaryKey() == primaryKey) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -221,12 +139,10 @@ public class PRProductClp extends BaseModelImpl<PRProduct> implements PRProduct 
 		}
 	}
 
-	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
-	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(11);
 
@@ -283,5 +199,4 @@ public class PRProductClp extends BaseModelImpl<PRProduct> implements PRProduct 
 	private String _serialNumber;
 	private long _companyId;
 	private long _groupId;
-	private BaseModel<?> _prProductRemoteModel;
 }

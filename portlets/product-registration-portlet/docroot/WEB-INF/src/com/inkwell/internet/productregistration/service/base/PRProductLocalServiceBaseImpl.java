@@ -16,7 +16,11 @@ package com.inkwell.internet.productregistration.service.base;
 
 import com.inkwell.internet.productregistration.model.PRProduct;
 import com.inkwell.internet.productregistration.service.PRProductLocalService;
+import com.inkwell.internet.productregistration.service.PRRegistrationLocalService;
+import com.inkwell.internet.productregistration.service.PRUserLocalService;
 import com.inkwell.internet.productregistration.service.persistence.PRProductPersistence;
+import com.inkwell.internet.productregistration.service.persistence.PRRegistrationPersistence;
+import com.inkwell.internet.productregistration.service.persistence.PRUserPersistence;
 
 import com.liferay.counter.service.CounterLocalService;
 
@@ -311,6 +315,80 @@ public abstract class PRProductLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
+	 * Returns the p r registration local service.
+	 *
+	 * @return the p r registration local service
+	 */
+	public PRRegistrationLocalService getPRRegistrationLocalService() {
+		return prRegistrationLocalService;
+	}
+
+	/**
+	 * Sets the p r registration local service.
+	 *
+	 * @param prRegistrationLocalService the p r registration local service
+	 */
+	public void setPRRegistrationLocalService(
+		PRRegistrationLocalService prRegistrationLocalService) {
+		this.prRegistrationLocalService = prRegistrationLocalService;
+	}
+
+	/**
+	 * Returns the p r registration persistence.
+	 *
+	 * @return the p r registration persistence
+	 */
+	public PRRegistrationPersistence getPRRegistrationPersistence() {
+		return prRegistrationPersistence;
+	}
+
+	/**
+	 * Sets the p r registration persistence.
+	 *
+	 * @param prRegistrationPersistence the p r registration persistence
+	 */
+	public void setPRRegistrationPersistence(
+		PRRegistrationPersistence prRegistrationPersistence) {
+		this.prRegistrationPersistence = prRegistrationPersistence;
+	}
+
+	/**
+	 * Returns the p r user local service.
+	 *
+	 * @return the p r user local service
+	 */
+	public PRUserLocalService getPRUserLocalService() {
+		return prUserLocalService;
+	}
+
+	/**
+	 * Sets the p r user local service.
+	 *
+	 * @param prUserLocalService the p r user local service
+	 */
+	public void setPRUserLocalService(PRUserLocalService prUserLocalService) {
+		this.prUserLocalService = prUserLocalService;
+	}
+
+	/**
+	 * Returns the p r user persistence.
+	 *
+	 * @return the p r user persistence
+	 */
+	public PRUserPersistence getPRUserPersistence() {
+		return prUserPersistence;
+	}
+
+	/**
+	 * Sets the p r user persistence.
+	 *
+	 * @param prUserPersistence the p r user persistence
+	 */
+	public void setPRUserPersistence(PRUserPersistence prUserPersistence) {
+		this.prUserPersistence = prUserPersistence;
+	}
+
+	/**
 	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
@@ -501,6 +579,14 @@ public abstract class PRProductLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected PRProductLocalService prProductLocalService;
 	@BeanReference(type = PRProductPersistence.class)
 	protected PRProductPersistence prProductPersistence;
+	@BeanReference(type = PRRegistrationLocalService.class)
+	protected PRRegistrationLocalService prRegistrationLocalService;
+	@BeanReference(type = PRRegistrationPersistence.class)
+	protected PRRegistrationPersistence prRegistrationPersistence;
+	@BeanReference(type = PRUserLocalService.class)
+	protected PRUserLocalService prUserLocalService;
+	@BeanReference(type = PRUserPersistence.class)
+	protected PRUserPersistence prUserPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
 	@BeanReference(type = ResourceLocalService.class)

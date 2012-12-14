@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.ServiceContext;
 
 import java.util.List;
@@ -29,23 +28,19 @@ import java.util.List;
  * The persistence utility for the p r product service. This utility wraps {@link PRProductPersistenceImpl} and provides direct access to the database for CRUD operations. This utility should only be used by the service layer, as it must operate within a transaction. Never access this utility in a JSP, controller, model, or other front-end class.
  *
  * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
- * @author
-manish
-
+ * @author Rich Sezov
  * @see PRProductPersistence
  * @see PRProductPersistenceImpl
  * @generated
  */
 public class PRProductUtil {
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
-	 */
-
 	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache()
 	 */
@@ -97,6 +92,14 @@ public class PRProductUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
+	 */
+	public static PRProduct remove(PRProduct prProduct)
+		throws SystemException {
+		return getPersistence().remove(prProduct);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static PRProduct update(PRProduct prProduct, boolean merge)
@@ -115,7 +118,7 @@ public class PRProductUtil {
 	/**
 	* Caches the p r product in the entity cache if it is enabled.
 	*
-	* @param prProduct the p r product
+	* @param prProduct the p r product to cache
 	*/
 	public static void cacheResult(
 		com.inkwell.internet.productregistration.model.PRProduct prProduct) {
@@ -125,7 +128,7 @@ public class PRProductUtil {
 	/**
 	* Caches the p r products in the entity cache if it is enabled.
 	*
-	* @param prProducts the p r products
+	* @param prProducts the p r products to cache
 	*/
 	public static void cacheResult(
 		java.util.List<com.inkwell.internet.productregistration.model.PRProduct> prProducts) {
@@ -146,7 +149,7 @@ public class PRProductUtil {
 	/**
 	* Removes the p r product with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param productId the primary key of the p r product
+	* @param productId the primary key of the p r product to remove
 	* @return the p r product that was removed
 	* @throws com.inkwell.internet.productregistration.NoSuchProductException if a p r product with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -166,9 +169,9 @@ public class PRProductUtil {
 	}
 
 	/**
-	* Returns the p r product with the primary key or throws a {@link com.inkwell.internet.productregistration.NoSuchProductException} if it could not be found.
+	* Finds the p r product with the primary key or throws a {@link com.inkwell.internet.productregistration.NoSuchProductException} if it could not be found.
 	*
-	* @param productId the primary key of the p r product
+	* @param productId the primary key of the p r product to find
 	* @return the p r product
 	* @throws com.inkwell.internet.productregistration.NoSuchProductException if a p r product with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -181,9 +184,9 @@ public class PRProductUtil {
 	}
 
 	/**
-	* Returns the p r product with the primary key or returns <code>null</code> if it could not be found.
+	* Finds the p r product with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param productId the primary key of the p r product
+	* @param productId the primary key of the p r product to find
 	* @return the p r product, or <code>null</code> if a p r product with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -194,10 +197,10 @@ public class PRProductUtil {
 	}
 
 	/**
-	* Returns all the p r products where groupId = &#63; and productName = &#63;.
+	* Finds all the p r products where groupId = &#63; and productName = &#63;.
 	*
-	* @param groupId the group ID
-	* @param productName the product name
+	* @param groupId the group id to search with
+	* @param productName the product name to search with
 	* @return the matching p r products
 	* @throws SystemException if a system exception occurred
 	*/
@@ -208,16 +211,16 @@ public class PRProductUtil {
 	}
 
 	/**
-	* Returns a range of all the p r products where groupId = &#63; and productName = &#63;.
+	* Finds a range of all the p r products where groupId = &#63; and productName = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID
-	* @param productName the product name
-	* @param start the lower bound of the range of p r products
-	* @param end the upper bound of the range of p r products (not inclusive)
+	* @param groupId the group id to search with
+	* @param productName the product name to search with
+	* @param start the lower bound of the range of p r products to return
+	* @param end the upper bound of the range of p r products to return (not inclusive)
 	* @return the range of matching p r products
 	* @throws SystemException if a system exception occurred
 	*/
@@ -228,17 +231,17 @@ public class PRProductUtil {
 	}
 
 	/**
-	* Returns an ordered range of all the p r products where groupId = &#63; and productName = &#63;.
+	* Finds an ordered range of all the p r products where groupId = &#63; and productName = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID
-	* @param productName the product name
-	* @param start the lower bound of the range of p r products
-	* @param end the upper bound of the range of p r products (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param groupId the group id to search with
+	* @param productName the product name to search with
+	* @param start the lower bound of the range of p r products to return
+	* @param end the upper bound of the range of p r products to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
 	* @return the ordered range of matching p r products
 	* @throws SystemException if a system exception occurred
 	*/
@@ -252,11 +255,15 @@ public class PRProductUtil {
 	}
 
 	/**
-	* Returns the first p r product in the ordered set where groupId = &#63; and productName = &#63;.
+	* Finds the first p r product in the ordered set where groupId = &#63; and productName = &#63;.
 	*
-	* @param groupId the group ID
-	* @param productName the product name
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param productName the product name to search with
+	* @param orderByComparator the comparator to order the set by
 	* @return the first matching p r product
 	* @throws com.inkwell.internet.productregistration.NoSuchProductException if a matching p r product could not be found
 	* @throws SystemException if a system exception occurred
@@ -271,28 +278,15 @@ public class PRProductUtil {
 	}
 
 	/**
-	* Returns the first p r product in the ordered set where groupId = &#63; and productName = &#63;.
+	* Finds the last p r product in the ordered set where groupId = &#63; and productName = &#63;.
 	*
-	* @param groupId the group ID
-	* @param productName the product name
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching p r product, or <code>null</code> if a matching p r product could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.inkwell.internet.productregistration.model.PRProduct fetchByG_PN_First(
-		long groupId, java.lang.String productName,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .fetchByG_PN_First(groupId, productName, orderByComparator);
-	}
-
-	/**
-	* Returns the last p r product in the ordered set where groupId = &#63; and productName = &#63;.
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
 	*
-	* @param groupId the group ID
-	* @param productName the product name
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @param groupId the group id to search with
+	* @param productName the product name to search with
+	* @param orderByComparator the comparator to order the set by
 	* @return the last matching p r product
 	* @throws com.inkwell.internet.productregistration.NoSuchProductException if a matching p r product could not be found
 	* @throws SystemException if a system exception occurred
@@ -307,29 +301,16 @@ public class PRProductUtil {
 	}
 
 	/**
-	* Returns the last p r product in the ordered set where groupId = &#63; and productName = &#63;.
+	* Finds the p r products before and after the current p r product in the ordered set where groupId = &#63; and productName = &#63;.
 	*
-	* @param groupId the group ID
-	* @param productName the product name
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching p r product, or <code>null</code> if a matching p r product could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.inkwell.internet.productregistration.model.PRProduct fetchByG_PN_Last(
-		long groupId, java.lang.String productName,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .fetchByG_PN_Last(groupId, productName, orderByComparator);
-	}
-
-	/**
-	* Returns the p r products before and after the current p r product in the ordered set where groupId = &#63; and productName = &#63;.
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
 	*
 	* @param productId the primary key of the current p r product
-	* @param groupId the group ID
-	* @param productName the product name
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @param groupId the group id to search with
+	* @param productName the product name to search with
+	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next p r product
 	* @throws com.inkwell.internet.productregistration.NoSuchProductException if a p r product with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -345,9 +326,68 @@ public class PRProductUtil {
 	}
 
 	/**
-	* Returns all the p r products where groupId = &#63;.
+	* Filters by the user's permissions and finds all the p r products where groupId = &#63; and productName = &#63;.
 	*
-	* @param groupId the group ID
+	* @param groupId the group id to search with
+	* @param productName the product name to search with
+	* @return the matching p r products that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.inkwell.internet.productregistration.model.PRProduct> filterFindByG_PN(
+		long groupId, java.lang.String productName)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByG_PN(groupId, productName);
+	}
+
+	/**
+	* Filters by the user's permissions and finds a range of all the p r products where groupId = &#63; and productName = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param productName the product name to search with
+	* @param start the lower bound of the range of p r products to return
+	* @param end the upper bound of the range of p r products to return (not inclusive)
+	* @return the range of matching p r products that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.inkwell.internet.productregistration.model.PRProduct> filterFindByG_PN(
+		long groupId, java.lang.String productName, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByG_PN(groupId, productName, start, end);
+	}
+
+	/**
+	* Filters by the user's permissions and finds an ordered range of all the p r products where groupId = &#63; and productName = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param productName the product name to search with
+	* @param start the lower bound of the range of p r products to return
+	* @param end the upper bound of the range of p r products to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching p r products that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.inkwell.internet.productregistration.model.PRProduct> filterFindByG_PN(
+		long groupId, java.lang.String productName, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByG_PN(groupId, productName, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Finds all the p r products where groupId = &#63;.
+	*
+	* @param groupId the group id to search with
 	* @return the matching p r products
 	* @throws SystemException if a system exception occurred
 	*/
@@ -358,15 +398,15 @@ public class PRProductUtil {
 	}
 
 	/**
-	* Returns a range of all the p r products where groupId = &#63;.
+	* Finds a range of all the p r products where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID
-	* @param start the lower bound of the range of p r products
-	* @param end the upper bound of the range of p r products (not inclusive)
+	* @param groupId the group id to search with
+	* @param start the lower bound of the range of p r products to return
+	* @param end the upper bound of the range of p r products to return (not inclusive)
 	* @return the range of matching p r products
 	* @throws SystemException if a system exception occurred
 	*/
@@ -377,16 +417,16 @@ public class PRProductUtil {
 	}
 
 	/**
-	* Returns an ordered range of all the p r products where groupId = &#63;.
+	* Finds an ordered range of all the p r products where groupId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group ID
-	* @param start the lower bound of the range of p r products
-	* @param end the upper bound of the range of p r products (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param groupId the group id to search with
+	* @param start the lower bound of the range of p r products to return
+	* @param end the upper bound of the range of p r products to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
 	* @return the ordered range of matching p r products
 	* @throws SystemException if a system exception occurred
 	*/
@@ -399,10 +439,14 @@ public class PRProductUtil {
 	}
 
 	/**
-	* Returns the first p r product in the ordered set where groupId = &#63;.
+	* Finds the first p r product in the ordered set where groupId = &#63;.
 	*
-	* @param groupId the group ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param orderByComparator the comparator to order the set by
 	* @return the first matching p r product
 	* @throws com.inkwell.internet.productregistration.NoSuchProductException if a matching p r product could not be found
 	* @throws SystemException if a system exception occurred
@@ -416,25 +460,14 @@ public class PRProductUtil {
 	}
 
 	/**
-	* Returns the first p r product in the ordered set where groupId = &#63;.
+	* Finds the last p r product in the ordered set where groupId = &#63;.
 	*
-	* @param groupId the group ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching p r product, or <code>null</code> if a matching p r product could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.inkwell.internet.productregistration.model.PRProduct fetchByGroupId_First(
-		long groupId,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByGroupId_First(groupId, orderByComparator);
-	}
-
-	/**
-	* Returns the last p r product in the ordered set where groupId = &#63;.
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
 	*
-	* @param groupId the group ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @param groupId the group id to search with
+	* @param orderByComparator the comparator to order the set by
 	* @return the last matching p r product
 	* @throws com.inkwell.internet.productregistration.NoSuchProductException if a matching p r product could not be found
 	* @throws SystemException if a system exception occurred
@@ -448,26 +481,15 @@ public class PRProductUtil {
 	}
 
 	/**
-	* Returns the last p r product in the ordered set where groupId = &#63;.
+	* Finds the p r products before and after the current p r product in the ordered set where groupId = &#63;.
 	*
-	* @param groupId the group ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching p r product, or <code>null</code> if a matching p r product could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.inkwell.internet.productregistration.model.PRProduct fetchByGroupId_Last(
-		long groupId,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByGroupId_Last(groupId, orderByComparator);
-	}
-
-	/**
-	* Returns the p r products before and after the current p r product in the ordered set where groupId = &#63;.
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
 	*
 	* @param productId the primary key of the current p r product
-	* @param groupId the group ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @param groupId the group id to search with
+	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next p r product
 	* @throws com.inkwell.internet.productregistration.NoSuchProductException if a p r product with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -483,9 +505,63 @@ public class PRProductUtil {
 	}
 
 	/**
-	* Returns all the p r products where companyId = &#63;.
+	* Filters by the user's permissions and finds all the p r products where groupId = &#63;.
 	*
-	* @param companyId the company ID
+	* @param groupId the group id to search with
+	* @return the matching p r products that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.inkwell.internet.productregistration.model.PRProduct> filterFindByGroupId(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByGroupId(groupId);
+	}
+
+	/**
+	* Filters by the user's permissions and finds a range of all the p r products where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param start the lower bound of the range of p r products to return
+	* @param end the upper bound of the range of p r products to return (not inclusive)
+	* @return the range of matching p r products that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.inkwell.internet.productregistration.model.PRProduct> filterFindByGroupId(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByGroupId(groupId, start, end);
+	}
+
+	/**
+	* Filters by the user's permissions and finds an ordered range of all the p r products where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param start the lower bound of the range of p r products to return
+	* @param end the upper bound of the range of p r products to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching p r products that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.inkwell.internet.productregistration.model.PRProduct> filterFindByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByGroupId(groupId, start, end, orderByComparator);
+	}
+
+	/**
+	* Finds all the p r products where companyId = &#63;.
+	*
+	* @param companyId the company id to search with
 	* @return the matching p r products
 	* @throws SystemException if a system exception occurred
 	*/
@@ -496,15 +572,15 @@ public class PRProductUtil {
 	}
 
 	/**
-	* Returns a range of all the p r products where companyId = &#63;.
+	* Finds a range of all the p r products where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID
-	* @param start the lower bound of the range of p r products
-	* @param end the upper bound of the range of p r products (not inclusive)
+	* @param companyId the company id to search with
+	* @param start the lower bound of the range of p r products to return
+	* @param end the upper bound of the range of p r products to return (not inclusive)
 	* @return the range of matching p r products
 	* @throws SystemException if a system exception occurred
 	*/
@@ -515,16 +591,16 @@ public class PRProductUtil {
 	}
 
 	/**
-	* Returns an ordered range of all the p r products where companyId = &#63;.
+	* Finds an ordered range of all the p r products where companyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company ID
-	* @param start the lower bound of the range of p r products
-	* @param end the upper bound of the range of p r products (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param companyId the company id to search with
+	* @param start the lower bound of the range of p r products to return
+	* @param end the upper bound of the range of p r products to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
 	* @return the ordered range of matching p r products
 	* @throws SystemException if a system exception occurred
 	*/
@@ -537,10 +613,14 @@ public class PRProductUtil {
 	}
 
 	/**
-	* Returns the first p r product in the ordered set where companyId = &#63;.
+	* Finds the first p r product in the ordered set where companyId = &#63;.
 	*
-	* @param companyId the company ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param orderByComparator the comparator to order the set by
 	* @return the first matching p r product
 	* @throws com.inkwell.internet.productregistration.NoSuchProductException if a matching p r product could not be found
 	* @throws SystemException if a system exception occurred
@@ -555,26 +635,14 @@ public class PRProductUtil {
 	}
 
 	/**
-	* Returns the first p r product in the ordered set where companyId = &#63;.
+	* Finds the last p r product in the ordered set where companyId = &#63;.
 	*
-	* @param companyId the company ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching p r product, or <code>null</code> if a matching p r product could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.inkwell.internet.productregistration.model.PRProduct fetchByCompanyId_First(
-		long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .fetchByCompanyId_First(companyId, orderByComparator);
-	}
-
-	/**
-	* Returns the last p r product in the ordered set where companyId = &#63;.
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
 	*
-	* @param companyId the company ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @param companyId the company id to search with
+	* @param orderByComparator the comparator to order the set by
 	* @return the last matching p r product
 	* @throws com.inkwell.internet.productregistration.NoSuchProductException if a matching p r product could not be found
 	* @throws SystemException if a system exception occurred
@@ -589,27 +657,15 @@ public class PRProductUtil {
 	}
 
 	/**
-	* Returns the last p r product in the ordered set where companyId = &#63;.
+	* Finds the p r products before and after the current p r product in the ordered set where companyId = &#63;.
 	*
-	* @param companyId the company ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching p r product, or <code>null</code> if a matching p r product could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.inkwell.internet.productregistration.model.PRProduct fetchByCompanyId_Last(
-		long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .fetchByCompanyId_Last(companyId, orderByComparator);
-	}
-
-	/**
-	* Returns the p r products before and after the current p r product in the ordered set where companyId = &#63;.
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
 	*
 	* @param productId the primary key of the current p r product
-	* @param companyId the company ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @param companyId the company id to search with
+	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next p r product
 	* @throws com.inkwell.internet.productregistration.NoSuchProductException if a p r product with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -625,7 +681,7 @@ public class PRProductUtil {
 	}
 
 	/**
-	* Returns all the p r products.
+	* Finds all the p r products.
 	*
 	* @return the p r products
 	* @throws SystemException if a system exception occurred
@@ -636,14 +692,14 @@ public class PRProductUtil {
 	}
 
 	/**
-	* Returns a range of all the p r products.
+	* Finds a range of all the p r products.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of p r products
-	* @param end the upper bound of the range of p r products (not inclusive)
+	* @param start the lower bound of the range of p r products to return
+	* @param end the upper bound of the range of p r products to return (not inclusive)
 	* @return the range of p r products
 	* @throws SystemException if a system exception occurred
 	*/
@@ -654,15 +710,15 @@ public class PRProductUtil {
 	}
 
 	/**
-	* Returns an ordered range of all the p r products.
+	* Finds an ordered range of all the p r products.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of p r products
-	* @param end the upper bound of the range of p r products (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param start the lower bound of the range of p r products to return
+	* @param end the upper bound of the range of p r products to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
 	* @return the ordered range of p r products
 	* @throws SystemException if a system exception occurred
 	*/
@@ -676,8 +732,8 @@ public class PRProductUtil {
 	/**
 	* Removes all the p r products where groupId = &#63; and productName = &#63; from the database.
 	*
-	* @param groupId the group ID
-	* @param productName the product name
+	* @param groupId the group id to search with
+	* @param productName the product name to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByG_PN(long groupId, java.lang.String productName)
@@ -688,7 +744,7 @@ public class PRProductUtil {
 	/**
 	* Removes all the p r products where groupId = &#63; from the database.
 	*
-	* @param groupId the group ID
+	* @param groupId the group id to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByGroupId(long groupId)
@@ -699,7 +755,7 @@ public class PRProductUtil {
 	/**
 	* Removes all the p r products where companyId = &#63; from the database.
 	*
-	* @param companyId the company ID
+	* @param companyId the company id to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByCompanyId(long companyId)
@@ -718,10 +774,10 @@ public class PRProductUtil {
 	}
 
 	/**
-	* Returns the number of p r products where groupId = &#63; and productName = &#63;.
+	* Counts all the p r products where groupId = &#63; and productName = &#63;.
 	*
-	* @param groupId the group ID
-	* @param productName the product name
+	* @param groupId the group id to search with
+	* @param productName the product name to search with
 	* @return the number of matching p r products
 	* @throws SystemException if a system exception occurred
 	*/
@@ -731,9 +787,23 @@ public class PRProductUtil {
 	}
 
 	/**
-	* Returns the number of p r products where groupId = &#63;.
+	* Filters by the user's permissions and counts all the p r products where groupId = &#63; and productName = &#63;.
 	*
-	* @param groupId the group ID
+	* @param groupId the group id to search with
+	* @param productName the product name to search with
+	* @return the number of matching p r products that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int filterCountByG_PN(long groupId,
+		java.lang.String productName)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByG_PN(groupId, productName);
+	}
+
+	/**
+	* Counts all the p r products where groupId = &#63;.
+	*
+	* @param groupId the group id to search with
 	* @return the number of matching p r products
 	* @throws SystemException if a system exception occurred
 	*/
@@ -743,9 +813,21 @@ public class PRProductUtil {
 	}
 
 	/**
-	* Returns the number of p r products where companyId = &#63;.
+	* Filters by the user's permissions and counts all the p r products where groupId = &#63;.
 	*
-	* @param companyId the company ID
+	* @param groupId the group id to search with
+	* @return the number of matching p r products that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int filterCountByGroupId(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByGroupId(groupId);
+	}
+
+	/**
+	* Counts all the p r products where companyId = &#63;.
+	*
+	* @param companyId the company id to search with
 	* @return the number of matching p r products
 	* @throws SystemException if a system exception occurred
 	*/
@@ -755,7 +837,7 @@ public class PRProductUtil {
 	}
 
 	/**
-	* Returns the number of p r products.
+	* Counts all the p r products.
 	*
 	* @return the number of p r products
 	* @throws SystemException if a system exception occurred
@@ -767,20 +849,15 @@ public class PRProductUtil {
 
 	public static PRProductPersistence getPersistence() {
 		if (_persistence == null) {
-			_persistence = (PRProductPersistence)PortletBeanLocatorUtil.locate(com.inkwell.internet.productregistration.service.ClpSerializer.getServletContextName(),
+			_persistence = (PRProductPersistence)PortletBeanLocatorUtil.locate(com.inkwell.internet.productregistration.service.ClpSerializer.SERVLET_CONTEXT_NAME,
 					PRProductPersistence.class.getName());
-
-			ReferenceRegistry.registerReference(PRProductUtil.class,
-				"_persistence");
 		}
 
 		return _persistence;
 	}
 
-	/**
-	 * @deprecated
-	 */
 	public void setPersistence(PRProductPersistence persistence) {
+		_persistence = persistence;
 	}
 
 	private static PRProductPersistence _persistence;

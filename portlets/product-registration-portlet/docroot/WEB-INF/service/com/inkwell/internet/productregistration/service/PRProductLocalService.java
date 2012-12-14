@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,25 +14,24 @@
 
 package com.inkwell.internet.productregistration.service;
 
+import com.liferay.portal.kernel.annotation.Isolation;
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.transaction.Isolation;
-import com.liferay.portal.kernel.transaction.Propagation;
-import com.liferay.portal.kernel.transaction.Transactional;
-import com.liferay.portal.service.BaseLocalService;
-import com.liferay.portal.service.InvokableLocalService;
-import com.liferay.portal.service.PersistedModelLocalService;
 
 /**
  * The interface for the p r product local service.
  *
  * <p>
+ * Never modify or reference this interface directly. Always use {@link PRProductLocalServiceUtil} to access the p r product local service. Add custom service methods to {@link com.inkwell.internet.productregistration.service.impl.PRProductLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+ * </p>
+ *
+ * <p>
  * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
  * </p>
  *
- * @author
-manish
-
+ * @author Rich Sezov
  * @see PRProductLocalServiceUtil
  * @see com.inkwell.internet.productregistration.service.base.PRProductLocalServiceBaseImpl
  * @see com.inkwell.internet.productregistration.service.impl.PRProductLocalServiceImpl
@@ -40,18 +39,11 @@ manish
  */
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface PRProductLocalService extends BaseLocalService,
-	InvokableLocalService, PersistedModelLocalService {
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never modify or reference this interface directly. Always use {@link PRProductLocalServiceUtil} to access the p r product local service. Add custom service methods to {@link com.inkwell.internet.productregistration.service.impl.PRProductLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
-	 */
-
+public interface PRProductLocalService {
 	/**
 	* Adds the p r product to the database. Also notifies the appropriate model listeners.
 	*
-	* @param prProduct the p r product
+	* @param prProduct the p r product to add
 	* @return the p r product that was added
 	* @throws SystemException if a system exception occurred
 	*/
@@ -71,33 +63,28 @@ public interface PRProductLocalService extends BaseLocalService,
 	/**
 	* Deletes the p r product with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param productId the primary key of the p r product
-	* @return the p r product that was removed
+	* @param productId the primary key of the p r product to delete
 	* @throws PortalException if a p r product with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.inkwell.internet.productregistration.model.PRProduct deletePRProduct(
-		long productId)
+	public void deletePRProduct(long productId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
 	* Deletes the p r product from the database. Also notifies the appropriate model listeners.
 	*
-	* @param prProduct the p r product
-	* @return the p r product that was removed
+	* @param prProduct the p r product to delete
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.inkwell.internet.productregistration.model.PRProduct deletePRProduct(
+	public void deletePRProduct(
 		com.inkwell.internet.productregistration.model.PRProduct prProduct)
 		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery();
 
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
 	*
-	* @param dynamicQuery the dynamic query
+	* @param dynamicQuery the dynamic query to search with
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -113,9 +100,9 @@ public interface PRProductLocalService extends BaseLocalService,
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query
-	* @param start the lower bound of the range of model instances
-	* @param end the upper bound of the range of model instances (not inclusive)
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -131,10 +118,10 @@ public interface PRProductLocalService extends BaseLocalService,
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param dynamicQuery the dynamic query
-	* @param start the lower bound of the range of model instances
-	* @param end the upper bound of the range of model instances (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -146,9 +133,9 @@ public interface PRProductLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the number of rows that match the dynamic query.
+	* Counts the number of rows that match the dynamic query.
 	*
-	* @param dynamicQuery the dynamic query
+	* @param dynamicQuery the dynamic query to search with
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
@@ -156,15 +143,10 @@ public interface PRProductLocalService extends BaseLocalService,
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.inkwell.internet.productregistration.model.PRProduct fetchPRProduct(
-		long productId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
 	/**
-	* Returns the p r product with the primary key.
+	* Gets the p r product with the primary key.
 	*
-	* @param productId the primary key of the p r product
+	* @param productId the primary key of the p r product to get
 	* @return the p r product
 	* @throws PortalException if a p r product with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -175,21 +157,15 @@ public interface PRProductLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portal.model.PersistedModel getPersistedModel(
-		java.io.Serializable primaryKeyObj)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
 	/**
-	* Returns a range of all the p r products.
+	* Gets a range of all the p r products.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of p r products
-	* @param end the upper bound of the range of p r products (not inclusive)
+	* @param start the lower bound of the range of p r products to return
+	* @param end the upper bound of the range of p r products to return (not inclusive)
 	* @return the range of p r products
 	* @throws SystemException if a system exception occurred
 	*/
@@ -199,7 +175,7 @@ public interface PRProductLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the number of p r products.
+	* Gets the number of p r products.
 	*
 	* @return the number of p r products
 	* @throws SystemException if a system exception occurred
@@ -209,9 +185,9 @@ public interface PRProductLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Updates the p r product in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
+	* Updates the p r product in the database. Also notifies the appropriate model listeners.
 	*
-	* @param prProduct the p r product
+	* @param prProduct the p r product to update
 	* @return the p r product that was updated
 	* @throws SystemException if a system exception occurred
 	*/
@@ -220,9 +196,9 @@ public interface PRProductLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Updates the p r product in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
+	* Updates the p r product in the database. Also notifies the appropriate model listeners.
 	*
-	* @param prProduct the p r product
+	* @param prProduct the p r product to update
 	* @param merge whether to merge the p r product with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	* @return the p r product that was updated
 	* @throws SystemException if a system exception occurred
@@ -233,40 +209,55 @@ public interface PRProductLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the Spring bean ID for this bean.
+	* Adds a new product to the database.
 	*
-	* @return the Spring bean ID for this bean
+	* @param productName
+	* @param productSerial
+	* @return
+	* @throws com.liferay.portal.kernel.exception.SystemException
 	*/
-	public java.lang.String getBeanIdentifier();
-
-	/**
-	* Sets the Spring bean ID for this bean.
-	*
-	* @param beanIdentifier the Spring bean ID for this bean
-	*/
-	public void setBeanIdentifier(java.lang.String beanIdentifier);
-
-	public java.lang.Object invokeMethod(java.lang.String name,
-		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
-		throws java.lang.Throwable;
-
 	public com.inkwell.internet.productregistration.model.PRProduct addProduct(
 		com.inkwell.internet.productregistration.model.PRProduct newProduct,
 		long userId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void deleteProduct(long productId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public void deleteProduct(
-		com.inkwell.internet.productregistration.model.PRProduct product)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
+	/**
+	* Retrieves all of the products from the database.
+	*
+	* @return
+	* @throws com.liferay.portal.kernel.exception.SystemException
+	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.inkwell.internet.productregistration.model.PRProduct> getAllProducts(
 		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Removes the specified product from the database.
+	*
+	* @param productId
+	* @param companyId
+	* @throws com.inkwell.internet.portlets.prodreg.sb.NoSuchProductException
+	* @throws com.liferay.portal.kernel.exception.SystemException
+	* @throws com.liferay.portal.kernel.exception.PortalException
+	*/
+	public void deleteProduct(long productId, long companyId)
+		throws com.inkwell.internet.productregistration.NoSuchProductException,
+			com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Removes the specified product from the database.
+	*
+	* @param product
+	* @param companyId
+	* @throws com.liferay.portal.kernel.exception.PortalException
+	* @throws com.liferay.portal.kernel.exception.SystemException
+	*/
+	public void deleteProduct(
+		com.inkwell.internet.productregistration.model.PRProduct product,
+		long companyId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 }

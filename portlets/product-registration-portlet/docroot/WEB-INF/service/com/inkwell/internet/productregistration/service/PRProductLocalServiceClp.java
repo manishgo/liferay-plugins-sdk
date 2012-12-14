@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,127 +14,83 @@
 
 package com.inkwell.internet.productregistration.service;
 
-import com.liferay.portal.service.InvokableLocalService;
+import com.liferay.portal.kernel.util.ClassLoaderProxy;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
 
 /**
- * @author 
-manish
-    
+ * @author Rich Sezov
  */
 public class PRProductLocalServiceClp implements PRProductLocalService {
-	public PRProductLocalServiceClp(InvokableLocalService invokableLocalService) {
-		_invokableLocalService = invokableLocalService;
+	public PRProductLocalServiceClp(ClassLoaderProxy classLoaderProxy) {
+		_classLoaderProxy = classLoaderProxy;
 
-		_methodName0 = "addPRProduct";
+		_addPRProductMethodKey0 = new MethodKey(_classLoaderProxy.getClassName(),
+				"addPRProduct",
+				com.inkwell.internet.productregistration.model.PRProduct.class);
 
-		_methodParameterTypes0 = new String[] {
-				"com.inkwell.internet.productregistration.model.PRProduct"
-			};
+		_createPRProductMethodKey1 = new MethodKey(_classLoaderProxy.getClassName(),
+				"createPRProduct", long.class);
 
-		_methodName1 = "createPRProduct";
+		_deletePRProductMethodKey2 = new MethodKey(_classLoaderProxy.getClassName(),
+				"deletePRProduct", long.class);
 
-		_methodParameterTypes1 = new String[] { "long" };
+		_deletePRProductMethodKey3 = new MethodKey(_classLoaderProxy.getClassName(),
+				"deletePRProduct",
+				com.inkwell.internet.productregistration.model.PRProduct.class);
 
-		_methodName2 = "deletePRProduct";
+		_dynamicQueryMethodKey4 = new MethodKey(_classLoaderProxy.getClassName(),
+				"dynamicQuery",
+				com.liferay.portal.kernel.dao.orm.DynamicQuery.class);
 
-		_methodParameterTypes2 = new String[] { "long" };
+		_dynamicQueryMethodKey5 = new MethodKey(_classLoaderProxy.getClassName(),
+				"dynamicQuery",
+				com.liferay.portal.kernel.dao.orm.DynamicQuery.class,
+				int.class, int.class);
 
-		_methodName3 = "deletePRProduct";
+		_dynamicQueryMethodKey6 = new MethodKey(_classLoaderProxy.getClassName(),
+				"dynamicQuery",
+				com.liferay.portal.kernel.dao.orm.DynamicQuery.class,
+				int.class, int.class,
+				com.liferay.portal.kernel.util.OrderByComparator.class);
 
-		_methodParameterTypes3 = new String[] {
-				"com.inkwell.internet.productregistration.model.PRProduct"
-			};
+		_dynamicQueryCountMethodKey7 = new MethodKey(_classLoaderProxy.getClassName(),
+				"dynamicQueryCount",
+				com.liferay.portal.kernel.dao.orm.DynamicQuery.class);
 
-		_methodName4 = "dynamicQuery";
+		_getPRProductMethodKey8 = new MethodKey(_classLoaderProxy.getClassName(),
+				"getPRProduct", long.class);
 
-		_methodParameterTypes4 = new String[] {  };
+		_getPRProductsMethodKey9 = new MethodKey(_classLoaderProxy.getClassName(),
+				"getPRProducts", int.class, int.class);
 
-		_methodName5 = "dynamicQuery";
+		_getPRProductsCountMethodKey10 = new MethodKey(_classLoaderProxy.getClassName(),
+				"getPRProductsCount");
 
-		_methodParameterTypes5 = new String[] {
-				"com.liferay.portal.kernel.dao.orm.DynamicQuery"
-			};
+		_updatePRProductMethodKey11 = new MethodKey(_classLoaderProxy.getClassName(),
+				"updatePRProduct",
+				com.inkwell.internet.productregistration.model.PRProduct.class);
 
-		_methodName6 = "dynamicQuery";
+		_updatePRProductMethodKey12 = new MethodKey(_classLoaderProxy.getClassName(),
+				"updatePRProduct",
+				com.inkwell.internet.productregistration.model.PRProduct.class,
+				boolean.class);
 
-		_methodParameterTypes6 = new String[] {
-				"com.liferay.portal.kernel.dao.orm.DynamicQuery", "int", "int"
-			};
+		_addProductMethodKey13 = new MethodKey(_classLoaderProxy.getClassName(),
+				"addProduct",
+				com.inkwell.internet.productregistration.model.PRProduct.class,
+				long.class);
 
-		_methodName7 = "dynamicQuery";
+		_getAllProductsMethodKey14 = new MethodKey(_classLoaderProxy.getClassName(),
+				"getAllProducts", long.class);
 
-		_methodParameterTypes7 = new String[] {
-				"com.liferay.portal.kernel.dao.orm.DynamicQuery", "int", "int",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
+		_deleteProductMethodKey15 = new MethodKey(_classLoaderProxy.getClassName(),
+				"deleteProduct", long.class, long.class);
 
-		_methodName8 = "dynamicQueryCount";
-
-		_methodParameterTypes8 = new String[] {
-				"com.liferay.portal.kernel.dao.orm.DynamicQuery"
-			};
-
-		_methodName9 = "fetchPRProduct";
-
-		_methodParameterTypes9 = new String[] { "long" };
-
-		_methodName10 = "getPRProduct";
-
-		_methodParameterTypes10 = new String[] { "long" };
-
-		_methodName11 = "getPersistedModel";
-
-		_methodParameterTypes11 = new String[] { "java.io.Serializable" };
-
-		_methodName12 = "getPRProducts";
-
-		_methodParameterTypes12 = new String[] { "int", "int" };
-
-		_methodName13 = "getPRProductsCount";
-
-		_methodParameterTypes13 = new String[] {  };
-
-		_methodName14 = "updatePRProduct";
-
-		_methodParameterTypes14 = new String[] {
-				"com.inkwell.internet.productregistration.model.PRProduct"
-			};
-
-		_methodName15 = "updatePRProduct";
-
-		_methodParameterTypes15 = new String[] {
-				"com.inkwell.internet.productregistration.model.PRProduct",
-				"boolean"
-			};
-
-		_methodName16 = "getBeanIdentifier";
-
-		_methodParameterTypes16 = new String[] {  };
-
-		_methodName17 = "setBeanIdentifier";
-
-		_methodParameterTypes17 = new String[] { "java.lang.String" };
-
-		_methodName19 = "addProduct";
-
-		_methodParameterTypes19 = new String[] {
-				"com.inkwell.internet.productregistration.model.PRProduct",
-				"long"
-			};
-
-		_methodName20 = "deleteProduct";
-
-		_methodParameterTypes20 = new String[] { "long" };
-
-		_methodName21 = "deleteProduct";
-
-		_methodParameterTypes21 = new String[] {
-				"com.inkwell.internet.productregistration.model.PRProduct"
-			};
-
-		_methodName22 = "getAllProducts";
-
-		_methodParameterTypes22 = new String[] { "long" };
+		_deleteProductMethodKey16 = new MethodKey(_classLoaderProxy.getClassName(),
+				"deleteProduct",
+				com.inkwell.internet.productregistration.model.PRProduct.class,
+				long.class);
 	}
 
 	public com.inkwell.internet.productregistration.model.PRProduct addPRProduct(
@@ -142,14 +98,13 @@ public class PRProductLocalServiceClp implements PRProductLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
+		MethodHandler methodHandler = new MethodHandler(_addPRProductMethodKey0,
+				prProduct);
+
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName0,
-					_methodParameterTypes0,
-					new Object[] { ClpSerializer.translateInput(prProduct) });
+			returnObj = _classLoaderProxy.invoke(methodHandler);
 		}
 		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
 			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
 				throw (com.liferay.portal.kernel.exception.SystemException)t;
 			}
@@ -170,13 +125,13 @@ public class PRProductLocalServiceClp implements PRProductLocalService {
 		long productId) {
 		Object returnObj = null;
 
+		MethodHandler methodHandler = new MethodHandler(_createPRProductMethodKey1,
+				productId);
+
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName1,
-					_methodParameterTypes1, new Object[] { productId });
+			returnObj = _classLoaderProxy.invoke(methodHandler);
 		}
 		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
 			if (t instanceof RuntimeException) {
 				throw (RuntimeException)t;
 			}
@@ -189,19 +144,16 @@ public class PRProductLocalServiceClp implements PRProductLocalService {
 		return (com.inkwell.internet.productregistration.model.PRProduct)ClpSerializer.translateOutput(returnObj);
 	}
 
-	public com.inkwell.internet.productregistration.model.PRProduct deletePRProduct(
-		long productId)
+	public void deletePRProduct(long productId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		Object returnObj = null;
+		MethodHandler methodHandler = new MethodHandler(_deletePRProductMethodKey2,
+				productId);
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName2,
-					_methodParameterTypes2, new Object[] { productId });
+			_classLoaderProxy.invoke(methodHandler);
 		}
 		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
 			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
 				throw (com.liferay.portal.kernel.exception.PortalException)t;
 			}
@@ -218,23 +170,18 @@ public class PRProductLocalServiceClp implements PRProductLocalService {
 					" is not a valid exception");
 			}
 		}
-
-		return (com.inkwell.internet.productregistration.model.PRProduct)ClpSerializer.translateOutput(returnObj);
 	}
 
-	public com.inkwell.internet.productregistration.model.PRProduct deletePRProduct(
+	public void deletePRProduct(
 		com.inkwell.internet.productregistration.model.PRProduct prProduct)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		Object returnObj = null;
+		MethodHandler methodHandler = new MethodHandler(_deletePRProductMethodKey3,
+				prProduct);
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName3,
-					_methodParameterTypes3,
-					new Object[] { ClpSerializer.translateInput(prProduct) });
+			_classLoaderProxy.invoke(methodHandler);
 		}
 		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
 			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
 				throw (com.liferay.portal.kernel.exception.SystemException)t;
 			}
@@ -247,30 +194,6 @@ public class PRProductLocalServiceClp implements PRProductLocalService {
 					" is not a valid exception");
 			}
 		}
-
-		return (com.inkwell.internet.productregistration.model.PRProduct)ClpSerializer.translateOutput(returnObj);
-	}
-
-	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery() {
-		Object returnObj = null;
-
-		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName4,
-					_methodParameterTypes4, new Object[] {  });
-		}
-		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof RuntimeException) {
-				throw (RuntimeException)t;
-			}
-			else {
-				throw new RuntimeException(t.getClass().getName() +
-					" is not a valid exception");
-			}
-		}
-
-		return (com.liferay.portal.kernel.dao.orm.DynamicQuery)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -279,14 +202,13 @@ public class PRProductLocalServiceClp implements PRProductLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
+		MethodHandler methodHandler = new MethodHandler(_dynamicQueryMethodKey4,
+				dynamicQuery);
+
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName5,
-					_methodParameterTypes5,
-					new Object[] { ClpSerializer.translateInput(dynamicQuery) });
+			returnObj = _classLoaderProxy.invoke(methodHandler);
 		}
 		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
 			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
 				throw (com.liferay.portal.kernel.exception.SystemException)t;
 			}
@@ -309,20 +231,13 @@ public class PRProductLocalServiceClp implements PRProductLocalService {
 		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
+		MethodHandler methodHandler = new MethodHandler(_dynamicQueryMethodKey5,
+				dynamicQuery, start, end);
+
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName6,
-					_methodParameterTypes6,
-					new Object[] {
-						ClpSerializer.translateInput(dynamicQuery),
-						
-					start,
-						
-					end
-					});
+			returnObj = _classLoaderProxy.invoke(methodHandler);
 		}
 		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
 			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
 				throw (com.liferay.portal.kernel.exception.SystemException)t;
 			}
@@ -347,22 +262,13 @@ public class PRProductLocalServiceClp implements PRProductLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
+		MethodHandler methodHandler = new MethodHandler(_dynamicQueryMethodKey6,
+				dynamicQuery, start, end, orderByComparator);
+
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName7,
-					_methodParameterTypes7,
-					new Object[] {
-						ClpSerializer.translateInput(dynamicQuery),
-						
-					start,
-						
-					end,
-						
-					ClpSerializer.translateInput(orderByComparator)
-					});
+			returnObj = _classLoaderProxy.invoke(methodHandler);
 		}
 		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
 			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
 				throw (com.liferay.portal.kernel.exception.SystemException)t;
 			}
@@ -384,14 +290,13 @@ public class PRProductLocalServiceClp implements PRProductLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
+		MethodHandler methodHandler = new MethodHandler(_dynamicQueryCountMethodKey7,
+				dynamicQuery);
+
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName8,
-					_methodParameterTypes8,
-					new Object[] { ClpSerializer.translateInput(dynamicQuery) });
+			returnObj = _classLoaderProxy.invoke(methodHandler);
 		}
 		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
 			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
 				throw (com.liferay.portal.kernel.exception.SystemException)t;
 			}
@@ -408,47 +313,19 @@ public class PRProductLocalServiceClp implements PRProductLocalService {
 		return ((Long)returnObj).longValue();
 	}
 
-	public com.inkwell.internet.productregistration.model.PRProduct fetchPRProduct(
-		long productId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		Object returnObj = null;
-
-		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName9,
-					_methodParameterTypes9, new Object[] { productId });
-		}
-		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
-				throw (com.liferay.portal.kernel.exception.SystemException)t;
-			}
-
-			if (t instanceof RuntimeException) {
-				throw (RuntimeException)t;
-			}
-			else {
-				throw new RuntimeException(t.getClass().getName() +
-					" is not a valid exception");
-			}
-		}
-
-		return (com.inkwell.internet.productregistration.model.PRProduct)ClpSerializer.translateOutput(returnObj);
-	}
-
 	public com.inkwell.internet.productregistration.model.PRProduct getPRProduct(
 		long productId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
+		MethodHandler methodHandler = new MethodHandler(_getPRProductMethodKey8,
+				productId);
+
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName10,
-					_methodParameterTypes10, new Object[] { productId });
+			returnObj = _classLoaderProxy.invoke(methodHandler);
 		}
 		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
 			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
 				throw (com.liferay.portal.kernel.exception.PortalException)t;
 			}
@@ -467,40 +344,6 @@ public class PRProductLocalServiceClp implements PRProductLocalService {
 		}
 
 		return (com.inkwell.internet.productregistration.model.PRProduct)ClpSerializer.translateOutput(returnObj);
-	}
-
-	public com.liferay.portal.model.PersistedModel getPersistedModel(
-		java.io.Serializable primaryKeyObj)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		Object returnObj = null;
-
-		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName11,
-					_methodParameterTypes11,
-					new Object[] { ClpSerializer.translateInput(primaryKeyObj) });
-		}
-		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
-				throw (com.liferay.portal.kernel.exception.PortalException)t;
-			}
-
-			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
-				throw (com.liferay.portal.kernel.exception.SystemException)t;
-			}
-
-			if (t instanceof RuntimeException) {
-				throw (RuntimeException)t;
-			}
-			else {
-				throw new RuntimeException(t.getClass().getName() +
-					" is not a valid exception");
-			}
-		}
-
-		return (com.liferay.portal.model.PersistedModel)ClpSerializer.translateOutput(returnObj);
 	}
 
 	public java.util.List<com.inkwell.internet.productregistration.model.PRProduct> getPRProducts(
@@ -508,13 +351,13 @@ public class PRProductLocalServiceClp implements PRProductLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
+		MethodHandler methodHandler = new MethodHandler(_getPRProductsMethodKey9,
+				start, end);
+
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName12,
-					_methodParameterTypes12, new Object[] { start, end });
+			returnObj = _classLoaderProxy.invoke(methodHandler);
 		}
 		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
 			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
 				throw (com.liferay.portal.kernel.exception.SystemException)t;
 			}
@@ -535,13 +378,12 @@ public class PRProductLocalServiceClp implements PRProductLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
+		MethodHandler methodHandler = new MethodHandler(_getPRProductsCountMethodKey10);
+
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName13,
-					_methodParameterTypes13, new Object[] {  });
+			returnObj = _classLoaderProxy.invoke(methodHandler);
 		}
 		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
 			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
 				throw (com.liferay.portal.kernel.exception.SystemException)t;
 			}
@@ -563,14 +405,13 @@ public class PRProductLocalServiceClp implements PRProductLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
+		MethodHandler methodHandler = new MethodHandler(_updatePRProductMethodKey11,
+				prProduct);
+
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName14,
-					_methodParameterTypes14,
-					new Object[] { ClpSerializer.translateInput(prProduct) });
+			returnObj = _classLoaderProxy.invoke(methodHandler);
 		}
 		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
 			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
 				throw (com.liferay.portal.kernel.exception.SystemException)t;
 			}
@@ -593,14 +434,13 @@ public class PRProductLocalServiceClp implements PRProductLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
+		MethodHandler methodHandler = new MethodHandler(_updatePRProductMethodKey12,
+				prProduct, merge);
+
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName15,
-					_methodParameterTypes15,
-					new Object[] { ClpSerializer.translateInput(prProduct), merge });
+			returnObj = _classLoaderProxy.invoke(methodHandler);
 		}
 		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
 			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
 				throw (com.liferay.portal.kernel.exception.SystemException)t;
 			}
@@ -617,53 +457,6 @@ public class PRProductLocalServiceClp implements PRProductLocalService {
 		return (com.inkwell.internet.productregistration.model.PRProduct)ClpSerializer.translateOutput(returnObj);
 	}
 
-	public java.lang.String getBeanIdentifier() {
-		Object returnObj = null;
-
-		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName16,
-					_methodParameterTypes16, new Object[] {  });
-		}
-		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof RuntimeException) {
-				throw (RuntimeException)t;
-			}
-			else {
-				throw new RuntimeException(t.getClass().getName() +
-					" is not a valid exception");
-			}
-		}
-
-		return (java.lang.String)ClpSerializer.translateOutput(returnObj);
-	}
-
-	public void setBeanIdentifier(java.lang.String beanIdentifier) {
-		try {
-			_invokableLocalService.invokeMethod(_methodName17,
-				_methodParameterTypes17,
-				new Object[] { ClpSerializer.translateInput(beanIdentifier) });
-		}
-		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof RuntimeException) {
-				throw (RuntimeException)t;
-			}
-			else {
-				throw new RuntimeException(t.getClass().getName() +
-					" is not a valid exception");
-			}
-		}
-	}
-
-	public java.lang.Object invokeMethod(java.lang.String name,
-		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
-		throws java.lang.Throwable {
-		throw new UnsupportedOperationException();
-	}
-
 	public com.inkwell.internet.productregistration.model.PRProduct addProduct(
 		com.inkwell.internet.productregistration.model.PRProduct newProduct,
 		long userId)
@@ -671,18 +464,13 @@ public class PRProductLocalServiceClp implements PRProductLocalService {
 			com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
+		MethodHandler methodHandler = new MethodHandler(_addProductMethodKey13,
+				newProduct, userId);
+
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName19,
-					_methodParameterTypes19,
-					new Object[] {
-						ClpSerializer.translateInput(newProduct),
-						
-					userId
-					});
+			returnObj = _classLoaderProxy.invoke(methodHandler);
 		}
 		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
 			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
 				throw (com.liferay.portal.kernel.exception.PortalException)t;
 			}
@@ -703,15 +491,48 @@ public class PRProductLocalServiceClp implements PRProductLocalService {
 		return (com.inkwell.internet.productregistration.model.PRProduct)ClpSerializer.translateOutput(returnObj);
 	}
 
-	public void deleteProduct(long productId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+	public java.util.List<com.inkwell.internet.productregistration.model.PRProduct> getAllProducts(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		MethodHandler methodHandler = new MethodHandler(_getAllProductsMethodKey14,
+				groupId);
+
 		try {
-			_invokableLocalService.invokeMethod(_methodName20,
-				_methodParameterTypes20, new Object[] { productId });
+			returnObj = _classLoaderProxy.invoke(methodHandler);
 		}
 		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.inkwell.internet.productregistration.model.PRProduct>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	public void deleteProduct(long productId, long companyId)
+		throws com.inkwell.internet.productregistration.NoSuchProductException,
+			com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		MethodHandler methodHandler = new MethodHandler(_deleteProductMethodKey15,
+				productId, companyId);
+
+		try {
+			_classLoaderProxy.invoke(methodHandler);
+		}
+		catch (Throwable t) {
+			if (t instanceof com.inkwell.internet.productregistration.NoSuchProductException) {
+				throw (com.inkwell.internet.productregistration.NoSuchProductException)t;
+			}
 
 			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
 				throw (com.liferay.portal.kernel.exception.PortalException)t;
@@ -732,17 +553,17 @@ public class PRProductLocalServiceClp implements PRProductLocalService {
 	}
 
 	public void deleteProduct(
-		com.inkwell.internet.productregistration.model.PRProduct product)
+		com.inkwell.internet.productregistration.model.PRProduct product,
+		long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
+		MethodHandler methodHandler = new MethodHandler(_deleteProductMethodKey16,
+				product, companyId);
+
 		try {
-			_invokableLocalService.invokeMethod(_methodName21,
-				_methodParameterTypes21,
-				new Object[] { ClpSerializer.translateInput(product) });
+			_classLoaderProxy.invoke(methodHandler);
 		}
 		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
 			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
 				throw (com.liferay.portal.kernel.exception.PortalException)t;
 			}
@@ -761,77 +582,26 @@ public class PRProductLocalServiceClp implements PRProductLocalService {
 		}
 	}
 
-	public java.util.List<com.inkwell.internet.productregistration.model.PRProduct> getAllProducts(
-		long groupId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		Object returnObj = null;
-
-		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName22,
-					_methodParameterTypes22, new Object[] { groupId });
-		}
-		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
-				throw (com.liferay.portal.kernel.exception.SystemException)t;
-			}
-
-			if (t instanceof RuntimeException) {
-				throw (RuntimeException)t;
-			}
-			else {
-				throw new RuntimeException(t.getClass().getName() +
-					" is not a valid exception");
-			}
-		}
-
-		return (java.util.List<com.inkwell.internet.productregistration.model.PRProduct>)ClpSerializer.translateOutput(returnObj);
+	public ClassLoaderProxy getClassLoaderProxy() {
+		return _classLoaderProxy;
 	}
 
-	private InvokableLocalService _invokableLocalService;
-	private String _methodName0;
-	private String[] _methodParameterTypes0;
-	private String _methodName1;
-	private String[] _methodParameterTypes1;
-	private String _methodName2;
-	private String[] _methodParameterTypes2;
-	private String _methodName3;
-	private String[] _methodParameterTypes3;
-	private String _methodName4;
-	private String[] _methodParameterTypes4;
-	private String _methodName5;
-	private String[] _methodParameterTypes5;
-	private String _methodName6;
-	private String[] _methodParameterTypes6;
-	private String _methodName7;
-	private String[] _methodParameterTypes7;
-	private String _methodName8;
-	private String[] _methodParameterTypes8;
-	private String _methodName9;
-	private String[] _methodParameterTypes9;
-	private String _methodName10;
-	private String[] _methodParameterTypes10;
-	private String _methodName11;
-	private String[] _methodParameterTypes11;
-	private String _methodName12;
-	private String[] _methodParameterTypes12;
-	private String _methodName13;
-	private String[] _methodParameterTypes13;
-	private String _methodName14;
-	private String[] _methodParameterTypes14;
-	private String _methodName15;
-	private String[] _methodParameterTypes15;
-	private String _methodName16;
-	private String[] _methodParameterTypes16;
-	private String _methodName17;
-	private String[] _methodParameterTypes17;
-	private String _methodName19;
-	private String[] _methodParameterTypes19;
-	private String _methodName20;
-	private String[] _methodParameterTypes20;
-	private String _methodName21;
-	private String[] _methodParameterTypes21;
-	private String _methodName22;
-	private String[] _methodParameterTypes22;
+	private ClassLoaderProxy _classLoaderProxy;
+	private MethodKey _addPRProductMethodKey0;
+	private MethodKey _createPRProductMethodKey1;
+	private MethodKey _deletePRProductMethodKey2;
+	private MethodKey _deletePRProductMethodKey3;
+	private MethodKey _dynamicQueryMethodKey4;
+	private MethodKey _dynamicQueryMethodKey5;
+	private MethodKey _dynamicQueryMethodKey6;
+	private MethodKey _dynamicQueryCountMethodKey7;
+	private MethodKey _getPRProductMethodKey8;
+	private MethodKey _getPRProductsMethodKey9;
+	private MethodKey _getPRProductsCountMethodKey10;
+	private MethodKey _updatePRProductMethodKey11;
+	private MethodKey _updatePRProductMethodKey12;
+	private MethodKey _addProductMethodKey13;
+	private MethodKey _getAllProductsMethodKey14;
+	private MethodKey _deleteProductMethodKey15;
+	private MethodKey _deleteProductMethodKey16;
 }

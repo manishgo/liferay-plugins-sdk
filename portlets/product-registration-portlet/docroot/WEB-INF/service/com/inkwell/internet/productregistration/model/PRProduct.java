@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,23 +14,22 @@
 
 package com.inkwell.internet.productregistration.model;
 
-import com.liferay.portal.model.PersistedModel;
-
 /**
- * The extended model interface for the PRProduct service. Represents a row in the &quot;PR_PRProduct&quot; database table, with each column mapped to a property of this class.
+ * The model interface for the PRProduct service. Represents a row in the &quot;PR_PRProduct&quot; database table, with each column mapped to a property of this class.
  *
- * @author
-manish
-
+ * <p>
+ * Never modify this interface directly. Add methods to {@link com.inkwell.internet.productregistration.model.impl.PRProductImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this interface directly. All methods that expect a p r product model instance should use the {@link PRProduct} interface instead.
+ * </p>
+ *
+ * @author Rich Sezov
  * @see PRProductModel
  * @see com.inkwell.internet.productregistration.model.impl.PRProductImpl
  * @see com.inkwell.internet.productregistration.model.impl.PRProductModelImpl
  * @generated
  */
-public interface PRProduct extends PRProductModel, PersistedModel {
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never modify this interface directly. Add methods to {@link com.inkwell.internet.productregistration.model.impl.PRProductImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
-	 */
+public interface PRProduct extends PRProductModel {
 }

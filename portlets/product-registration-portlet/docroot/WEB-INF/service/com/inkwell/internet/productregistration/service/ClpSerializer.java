@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -15,86 +15,27 @@
 package com.inkwell.internet.productregistration.service;
 
 import com.inkwell.internet.productregistration.model.PRProductClp;
+import com.inkwell.internet.productregistration.model.PRRegistrationClp;
+import com.inkwell.internet.productregistration.model.PRUserClp;
 
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
-import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.ClassLoaderObjectInputStream;
-import com.liferay.portal.kernel.util.PropsUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.BaseModel;
-
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 
 import java.lang.reflect.Method;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
  * @author Brian Wing Shun Chan
  */
 public class ClpSerializer {
-	public static String getServletContextName() {
-		if (Validator.isNotNull(_servletContextName)) {
-			return _servletContextName;
-		}
+	public static final String SERVLET_CONTEXT_NAME = "product-registration-portlet";
 
-		synchronized (ClpSerializer.class) {
-			if (Validator.isNotNull(_servletContextName)) {
-				return _servletContextName;
-			}
-
-			try {
-				ClassLoader classLoader = ClpSerializer.class.getClassLoader();
-
-				Class<?> portletPropsClass = classLoader.loadClass(
-						"com.liferay.util.portlet.PortletProps");
-
-				Method getMethod = portletPropsClass.getMethod("get",
-						new Class<?>[] { String.class });
-
-				String portletPropsServletContextName = (String)getMethod.invoke(null,
-						"product-registration-portlet-deployment-context");
-
-				if (Validator.isNotNull(portletPropsServletContextName)) {
-					_servletContextName = portletPropsServletContextName;
-				}
-			}
-			catch (Throwable t) {
-				if (_log.isInfoEnabled()) {
-					_log.info(
-						"Unable to locate deployment context from portlet properties");
-				}
-			}
-
-			if (Validator.isNull(_servletContextName)) {
-				try {
-					String propsUtilServletContextName = PropsUtil.get(
-							"product-registration-portlet-deployment-context");
-
-					if (Validator.isNotNull(propsUtilServletContextName)) {
-						_servletContextName = propsUtilServletContextName;
-					}
-				}
-				catch (Throwable t) {
-					if (_log.isInfoEnabled()) {
-						_log.info(
-							"Unable to locate deployment context from portal properties");
-					}
-				}
-			}
-
-			if (Validator.isNull(_servletContextName)) {
-				_servletContextName = "product-registration-portlet";
-			}
-
-			return _servletContextName;
-		}
+	public static void setClassLoader(ClassLoader classLoader) {
+		_classLoader = classLoader;
 	}
 
 	public static Object translateInput(BaseModel<?> oldModel) {
@@ -103,7 +44,291 @@ public class ClpSerializer {
 		String oldModelClassName = oldModelClass.getName();
 
 		if (oldModelClassName.equals(PRProductClp.class.getName())) {
-			return translateInputPRProduct(oldModel);
+			PRProductClp oldCplModel = (PRProductClp)oldModel;
+
+			ClassLoader contextClassLoader = Thread.currentThread()
+												   .getContextClassLoader();
+
+			try {
+				Thread.currentThread().setContextClassLoader(_classLoader);
+
+				try {
+					Class<?> newModelClass = Class.forName("com.inkwell.internet.productregistration.model.impl.PRProductImpl",
+							true, _classLoader);
+
+					Object newModel = newModelClass.newInstance();
+
+					Method method0 = newModelClass.getMethod("setProductId",
+							new Class[] { Long.TYPE });
+
+					Long value0 = new Long(oldCplModel.getProductId());
+
+					method0.invoke(newModel, value0);
+
+					Method method1 = newModelClass.getMethod("setProductName",
+							new Class[] { String.class });
+
+					String value1 = oldCplModel.getProductName();
+
+					method1.invoke(newModel, value1);
+
+					Method method2 = newModelClass.getMethod("setSerialNumber",
+							new Class[] { String.class });
+
+					String value2 = oldCplModel.getSerialNumber();
+
+					method2.invoke(newModel, value2);
+
+					Method method3 = newModelClass.getMethod("setCompanyId",
+							new Class[] { Long.TYPE });
+
+					Long value3 = new Long(oldCplModel.getCompanyId());
+
+					method3.invoke(newModel, value3);
+
+					Method method4 = newModelClass.getMethod("setGroupId",
+							new Class[] { Long.TYPE });
+
+					Long value4 = new Long(oldCplModel.getGroupId());
+
+					method4.invoke(newModel, value4);
+
+					return newModel;
+				}
+				catch (Exception e) {
+					_log.error(e, e);
+				}
+			}
+			finally {
+				Thread.currentThread().setContextClassLoader(contextClassLoader);
+			}
+		}
+
+		if (oldModelClassName.equals(PRUserClp.class.getName())) {
+			PRUserClp oldCplModel = (PRUserClp)oldModel;
+
+			ClassLoader contextClassLoader = Thread.currentThread()
+												   .getContextClassLoader();
+
+			try {
+				Thread.currentThread().setContextClassLoader(_classLoader);
+
+				try {
+					Class<?> newModelClass = Class.forName("com.inkwell.internet.productregistration.model.impl.PRUserImpl",
+							true, _classLoader);
+
+					Object newModel = newModelClass.newInstance();
+
+					Method method0 = newModelClass.getMethod("setPrUserId",
+							new Class[] { Long.TYPE });
+
+					Long value0 = new Long(oldCplModel.getPrUserId());
+
+					method0.invoke(newModel, value0);
+
+					Method method1 = newModelClass.getMethod("setFirstName",
+							new Class[] { String.class });
+
+					String value1 = oldCplModel.getFirstName();
+
+					method1.invoke(newModel, value1);
+
+					Method method2 = newModelClass.getMethod("setLastName",
+							new Class[] { String.class });
+
+					String value2 = oldCplModel.getLastName();
+
+					method2.invoke(newModel, value2);
+
+					Method method3 = newModelClass.getMethod("setAddress1",
+							new Class[] { String.class });
+
+					String value3 = oldCplModel.getAddress1();
+
+					method3.invoke(newModel, value3);
+
+					Method method4 = newModelClass.getMethod("setAddress2",
+							new Class[] { String.class });
+
+					String value4 = oldCplModel.getAddress2();
+
+					method4.invoke(newModel, value4);
+
+					Method method5 = newModelClass.getMethod("setCity",
+							new Class[] { String.class });
+
+					String value5 = oldCplModel.getCity();
+
+					method5.invoke(newModel, value5);
+
+					Method method6 = newModelClass.getMethod("setState",
+							new Class[] { String.class });
+
+					String value6 = oldCplModel.getState();
+
+					method6.invoke(newModel, value6);
+
+					Method method7 = newModelClass.getMethod("setPostalCode",
+							new Class[] { String.class });
+
+					String value7 = oldCplModel.getPostalCode();
+
+					method7.invoke(newModel, value7);
+
+					Method method8 = newModelClass.getMethod("setCountry",
+							new Class[] { String.class });
+
+					String value8 = oldCplModel.getCountry();
+
+					method8.invoke(newModel, value8);
+
+					Method method9 = newModelClass.getMethod("setPhoneNumber",
+							new Class[] { String.class });
+
+					String value9 = oldCplModel.getPhoneNumber();
+
+					method9.invoke(newModel, value9);
+
+					Method method10 = newModelClass.getMethod("setEmail",
+							new Class[] { String.class });
+
+					String value10 = oldCplModel.getEmail();
+
+					method10.invoke(newModel, value10);
+
+					Method method11 = newModelClass.getMethod("setBirthDate",
+							new Class[] { Date.class });
+
+					Date value11 = oldCplModel.getBirthDate();
+
+					method11.invoke(newModel, value11);
+
+					Method method12 = newModelClass.getMethod("setMale",
+							new Class[] { Boolean.TYPE });
+
+					Boolean value12 = new Boolean(oldCplModel.getMale());
+
+					method12.invoke(newModel, value12);
+
+					Method method13 = newModelClass.getMethod("setUserId",
+							new Class[] { Long.TYPE });
+
+					Long value13 = new Long(oldCplModel.getUserId());
+
+					method13.invoke(newModel, value13);
+
+					Method method14 = newModelClass.getMethod("setCompanyId",
+							new Class[] { Long.TYPE });
+
+					Long value14 = new Long(oldCplModel.getCompanyId());
+
+					method14.invoke(newModel, value14);
+
+					Method method15 = newModelClass.getMethod("setGroupId",
+							new Class[] { Long.TYPE });
+
+					Long value15 = new Long(oldCplModel.getGroupId());
+
+					method15.invoke(newModel, value15);
+
+					return newModel;
+				}
+				catch (Exception e) {
+					_log.error(e, e);
+				}
+			}
+			finally {
+				Thread.currentThread().setContextClassLoader(contextClassLoader);
+			}
+		}
+
+		if (oldModelClassName.equals(PRRegistrationClp.class.getName())) {
+			PRRegistrationClp oldCplModel = (PRRegistrationClp)oldModel;
+
+			ClassLoader contextClassLoader = Thread.currentThread()
+												   .getContextClassLoader();
+
+			try {
+				Thread.currentThread().setContextClassLoader(_classLoader);
+
+				try {
+					Class<?> newModelClass = Class.forName("com.inkwell.internet.productregistration.model.impl.PRRegistrationImpl",
+							true, _classLoader);
+
+					Object newModel = newModelClass.newInstance();
+
+					Method method0 = newModelClass.getMethod("setRegistrationId",
+							new Class[] { Long.TYPE });
+
+					Long value0 = new Long(oldCplModel.getRegistrationId());
+
+					method0.invoke(newModel, value0);
+
+					Method method1 = newModelClass.getMethod("setPrUserId",
+							new Class[] { Long.TYPE });
+
+					Long value1 = new Long(oldCplModel.getPrUserId());
+
+					method1.invoke(newModel, value1);
+
+					Method method2 = newModelClass.getMethod("setDatePurchased",
+							new Class[] { Date.class });
+
+					Date value2 = oldCplModel.getDatePurchased();
+
+					method2.invoke(newModel, value2);
+
+					Method method3 = newModelClass.getMethod("setHowHear",
+							new Class[] { String.class });
+
+					String value3 = oldCplModel.getHowHear();
+
+					method3.invoke(newModel, value3);
+
+					Method method4 = newModelClass.getMethod("setWherePurchased",
+							new Class[] { String.class });
+
+					String value4 = oldCplModel.getWherePurchased();
+
+					method4.invoke(newModel, value4);
+
+					Method method5 = newModelClass.getMethod("setSerialNumber",
+							new Class[] { String.class });
+
+					String value5 = oldCplModel.getSerialNumber();
+
+					method5.invoke(newModel, value5);
+
+					Method method6 = newModelClass.getMethod("setProductId",
+							new Class[] { Long.TYPE });
+
+					Long value6 = new Long(oldCplModel.getProductId());
+
+					method6.invoke(newModel, value6);
+
+					Method method7 = newModelClass.getMethod("setCompanyId",
+							new Class[] { Long.TYPE });
+
+					Long value7 = new Long(oldCplModel.getCompanyId());
+
+					method7.invoke(newModel, value7);
+
+					Method method8 = newModelClass.getMethod("setGroupId",
+							new Class[] { Long.TYPE });
+
+					Long value8 = new Long(oldCplModel.getGroupId());
+
+					method8.invoke(newModel, value8);
+
+					return newModel;
+				}
+				catch (Exception e) {
+					_log.error(e, e);
+				}
+			}
+			finally {
+				Thread.currentThread().setContextClassLoader(contextClassLoader);
+			}
 		}
 
 		return oldModel;
@@ -119,16 +344,6 @@ public class ClpSerializer {
 		}
 
 		return newList;
-	}
-
-	public static Object translateInputPRProduct(BaseModel<?> oldModel) {
-		PRProductClp oldClpModel = (PRProductClp)oldModel;
-
-		BaseModel<?> newModel = oldClpModel.getPRProductRemoteModel();
-
-		newModel.setModelAttributes(oldClpModel.getModelAttributes());
-
-		return newModel;
 	}
 
 	public static Object translateInput(Object obj) {
@@ -150,7 +365,270 @@ public class ClpSerializer {
 
 		if (oldModelClassName.equals(
 					"com.inkwell.internet.productregistration.model.impl.PRProductImpl")) {
-			return translateOutputPRProduct(oldModel);
+			ClassLoader contextClassLoader = Thread.currentThread()
+												   .getContextClassLoader();
+
+			try {
+				Thread.currentThread().setContextClassLoader(_classLoader);
+
+				try {
+					PRProductClp newModel = new PRProductClp();
+
+					Method method0 = oldModelClass.getMethod("getProductId");
+
+					Long value0 = (Long)method0.invoke(oldModel, (Object[])null);
+
+					newModel.setProductId(value0);
+
+					Method method1 = oldModelClass.getMethod("getProductName");
+
+					String value1 = (String)method1.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setProductName(value1);
+
+					Method method2 = oldModelClass.getMethod("getSerialNumber");
+
+					String value2 = (String)method2.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setSerialNumber(value2);
+
+					Method method3 = oldModelClass.getMethod("getCompanyId");
+
+					Long value3 = (Long)method3.invoke(oldModel, (Object[])null);
+
+					newModel.setCompanyId(value3);
+
+					Method method4 = oldModelClass.getMethod("getGroupId");
+
+					Long value4 = (Long)method4.invoke(oldModel, (Object[])null);
+
+					newModel.setGroupId(value4);
+
+					return newModel;
+				}
+				catch (Exception e) {
+					_log.error(e, e);
+				}
+			}
+			finally {
+				Thread.currentThread().setContextClassLoader(contextClassLoader);
+			}
+		}
+
+		if (oldModelClassName.equals(
+					"com.inkwell.internet.productregistration.model.impl.PRUserImpl")) {
+			ClassLoader contextClassLoader = Thread.currentThread()
+												   .getContextClassLoader();
+
+			try {
+				Thread.currentThread().setContextClassLoader(_classLoader);
+
+				try {
+					PRUserClp newModel = new PRUserClp();
+
+					Method method0 = oldModelClass.getMethod("getPrUserId");
+
+					Long value0 = (Long)method0.invoke(oldModel, (Object[])null);
+
+					newModel.setPrUserId(value0);
+
+					Method method1 = oldModelClass.getMethod("getFirstName");
+
+					String value1 = (String)method1.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setFirstName(value1);
+
+					Method method2 = oldModelClass.getMethod("getLastName");
+
+					String value2 = (String)method2.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setLastName(value2);
+
+					Method method3 = oldModelClass.getMethod("getAddress1");
+
+					String value3 = (String)method3.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setAddress1(value3);
+
+					Method method4 = oldModelClass.getMethod("getAddress2");
+
+					String value4 = (String)method4.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setAddress2(value4);
+
+					Method method5 = oldModelClass.getMethod("getCity");
+
+					String value5 = (String)method5.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setCity(value5);
+
+					Method method6 = oldModelClass.getMethod("getState");
+
+					String value6 = (String)method6.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setState(value6);
+
+					Method method7 = oldModelClass.getMethod("getPostalCode");
+
+					String value7 = (String)method7.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setPostalCode(value7);
+
+					Method method8 = oldModelClass.getMethod("getCountry");
+
+					String value8 = (String)method8.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setCountry(value8);
+
+					Method method9 = oldModelClass.getMethod("getPhoneNumber");
+
+					String value9 = (String)method9.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setPhoneNumber(value9);
+
+					Method method10 = oldModelClass.getMethod("getEmail");
+
+					String value10 = (String)method10.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setEmail(value10);
+
+					Method method11 = oldModelClass.getMethod("getBirthDate");
+
+					Date value11 = (Date)method11.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setBirthDate(value11);
+
+					Method method12 = oldModelClass.getMethod("getMale");
+
+					Boolean value12 = (Boolean)method12.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setMale(value12);
+
+					Method method13 = oldModelClass.getMethod("getUserId");
+
+					Long value13 = (Long)method13.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setUserId(value13);
+
+					Method method14 = oldModelClass.getMethod("getCompanyId");
+
+					Long value14 = (Long)method14.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setCompanyId(value14);
+
+					Method method15 = oldModelClass.getMethod("getGroupId");
+
+					Long value15 = (Long)method15.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setGroupId(value15);
+
+					return newModel;
+				}
+				catch (Exception e) {
+					_log.error(e, e);
+				}
+			}
+			finally {
+				Thread.currentThread().setContextClassLoader(contextClassLoader);
+			}
+		}
+
+		if (oldModelClassName.equals(
+					"com.inkwell.internet.productregistration.model.impl.PRRegistrationImpl")) {
+			ClassLoader contextClassLoader = Thread.currentThread()
+												   .getContextClassLoader();
+
+			try {
+				Thread.currentThread().setContextClassLoader(_classLoader);
+
+				try {
+					PRRegistrationClp newModel = new PRRegistrationClp();
+
+					Method method0 = oldModelClass.getMethod(
+							"getRegistrationId");
+
+					Long value0 = (Long)method0.invoke(oldModel, (Object[])null);
+
+					newModel.setRegistrationId(value0);
+
+					Method method1 = oldModelClass.getMethod("getPrUserId");
+
+					Long value1 = (Long)method1.invoke(oldModel, (Object[])null);
+
+					newModel.setPrUserId(value1);
+
+					Method method2 = oldModelClass.getMethod("getDatePurchased");
+
+					Date value2 = (Date)method2.invoke(oldModel, (Object[])null);
+
+					newModel.setDatePurchased(value2);
+
+					Method method3 = oldModelClass.getMethod("getHowHear");
+
+					String value3 = (String)method3.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setHowHear(value3);
+
+					Method method4 = oldModelClass.getMethod(
+							"getWherePurchased");
+
+					String value4 = (String)method4.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setWherePurchased(value4);
+
+					Method method5 = oldModelClass.getMethod("getSerialNumber");
+
+					String value5 = (String)method5.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setSerialNumber(value5);
+
+					Method method6 = oldModelClass.getMethod("getProductId");
+
+					Long value6 = (Long)method6.invoke(oldModel, (Object[])null);
+
+					newModel.setProductId(value6);
+
+					Method method7 = oldModelClass.getMethod("getCompanyId");
+
+					Long value7 = (Long)method7.invoke(oldModel, (Object[])null);
+
+					newModel.setCompanyId(value7);
+
+					Method method8 = oldModelClass.getMethod("getGroupId");
+
+					Long value8 = (Long)method8.invoke(oldModel, (Object[])null);
+
+					newModel.setGroupId(value8);
+
+					return newModel;
+				}
+				catch (Exception e) {
+					_log.error(e, e);
+				}
+			}
+			finally {
+				Thread.currentThread().setContextClassLoader(contextClassLoader);
+			}
 		}
 
 		return oldModel;
@@ -180,78 +658,6 @@ public class ClpSerializer {
 		}
 	}
 
-	public static Throwable translateThrowable(Throwable throwable) {
-		if (_useReflectionToTranslateThrowable) {
-			try {
-				UnsyncByteArrayOutputStream unsyncByteArrayOutputStream = new UnsyncByteArrayOutputStream();
-				ObjectOutputStream objectOutputStream = new ObjectOutputStream(unsyncByteArrayOutputStream);
-
-				objectOutputStream.writeObject(throwable);
-
-				objectOutputStream.flush();
-				objectOutputStream.close();
-
-				UnsyncByteArrayInputStream unsyncByteArrayInputStream = new UnsyncByteArrayInputStream(unsyncByteArrayOutputStream.unsafeGetByteArray(),
-						0, unsyncByteArrayOutputStream.size());
-
-				Thread currentThread = Thread.currentThread();
-
-				ClassLoader contextClassLoader = currentThread.getContextClassLoader();
-
-				ObjectInputStream objectInputStream = new ClassLoaderObjectInputStream(unsyncByteArrayInputStream,
-						contextClassLoader);
-
-				throwable = (Throwable)objectInputStream.readObject();
-
-				objectInputStream.close();
-
-				return throwable;
-			}
-			catch (SecurityException se) {
-				if (_log.isInfoEnabled()) {
-					_log.info("Do not use reflection to translate throwable");
-				}
-
-				_useReflectionToTranslateThrowable = false;
-			}
-			catch (Throwable throwable2) {
-				_log.error(throwable2, throwable2);
-
-				return throwable2;
-			}
-		}
-
-		Class<?> clazz = throwable.getClass();
-
-		String className = clazz.getName();
-
-		if (className.equals(PortalException.class.getName())) {
-			return new PortalException();
-		}
-
-		if (className.equals(SystemException.class.getName())) {
-			return new SystemException();
-		}
-
-		if (className.equals(
-					"com.inkwell.internet.productregistration.NoSuchProductException")) {
-			return new com.inkwell.internet.productregistration.NoSuchProductException();
-		}
-
-		return throwable;
-	}
-
-	public static Object translateOutputPRProduct(BaseModel<?> oldModel) {
-		PRProductClp newModel = new PRProductClp();
-
-		newModel.setModelAttributes(oldModel.getModelAttributes());
-
-		newModel.setPRProductRemoteModel(oldModel);
-
-		return newModel;
-	}
-
 	private static Log _log = LogFactoryUtil.getLog(ClpSerializer.class);
-	private static String _servletContextName;
-	private static boolean _useReflectionToTranslateThrowable = true;
+	private static ClassLoader _classLoader;
 }
